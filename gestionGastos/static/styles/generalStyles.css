@@ -23,33 +23,33 @@ a {
 header {
   background-color: #2b8a3e;  /* Verde */
   color: white;
-  padding: 20px 0;
+  padding: 30px 0;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* Sombra más suave */
 }
 
 header .logo h1 {
-  margin-bottom: 10px;
-  font-size: 40px;
-  letter-spacing: 1px; /* Espaciado entre letras */
-  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 42px;
+  letter-spacing: 1px;
+  font-weight: 700; /* Más énfasis */
 }
 
 header nav ul {
   list-style: none;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 header nav ul li {
   display: inline-block;
-  margin: 0 25px;
+  margin: 0 30px;
 }
 
 header nav ul li a {
   color: white;
   text-decoration: none;
-  font-size: 18px;
-  letter-spacing: 0.5px;
+  font-size: 20px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   font-weight: 500;
   transition: color 0.3s ease;
@@ -61,58 +61,70 @@ header nav ul li a:hover {
 
 /* Sección Hero */
 .hero {
-  background-color: #fcc419;  /* Amarillo */
+  background-color: #fcc419;  /* Amarillo suave */
   color: white;
   text-align: center;
-  padding: 80px 20px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  padding: 120px 20px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+}
+
+.hero-content {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
 }
 
 .hero-content h2 {
-  font-size: 50px;
-  margin-bottom: 20px;
-  font-weight: 600;
+  font-size: 65px;
+  margin-bottom: 25px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #2b8a3e; /* Verde */
 }
 
 .hero-content p {
-  font-size: 20px;
-  margin-bottom: 30px;
-  max-width: 700px;
+  font-size: 24px;
+  margin-bottom: 40px;
+  max-width: 750px;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.6;
+  color: #333;
 }
 
 .cta-button {
-  background-color: white;
-  color: #2b8a3e;  /* Verde */
-  padding: 15px 30px;
-  font-size: 20px;
-  border-radius: 5px;
+  background-color: #2b8a3e;  /* Verde */
+  color: white;
+  padding: 18px 40px;
+  font-size: 22px;
+  border-radius: 8px;
   text-transform: uppercase;
   font-weight: bold;
-  border: 2px solid #2b8a3e;
+  border: 3px solid #2b8a3e;
   transition: all 0.3s ease;
   cursor: pointer;
+  margin-top: 20px;
 }
 
 .cta-button:hover {
-  background-color: #2b8a3e;  /* Verde */
-  color: white;
+  background-color: white;
+  color: #2b8a3e;
   border-color: #fcc419;  /* Amarillo */
-  transform: scale(1.05); /* Efecto de aumento */
+  transform: scale(1.08); /* Efecto de aumento más suave */
 }
 
 /* Sección de características */
 .features {
   background-color: white;
-  padding: 80px 20px;
+  padding: 100px 20px;
   text-align: center;
 }
 
 .features h2 {
-  margin-bottom: 40px;
-  font-size: 32px;
-  font-weight: 600;
+  margin-bottom: 50px;
+  font-size: 36px;
+  font-weight: 700;
   color: #2b8a3e;  /* Verde */
 }
 
@@ -121,43 +133,82 @@ header nav ul li a:hover {
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 
 .feature {
   background-color: #fff;
-  padding: 30px;
-  margin: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  width: 280px;
-  transition: all 0.3s ease;
+  padding: 40px;
+  margin: 30px;
+  border-radius: 15px; /* Bordes más redondeados para un look más moderno */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+  width: 320px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease; /* Transición suave para todos los cambios */
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  border: 1px solid #e5e5e5; /* Borde suave para un acabado limpio */
 }
 
 .feature:hover {
-  transform: translateY(-10px); /* Efecto de desplazamiento al pasar el ratón */
+  transform: translateY(-15px); /* Efecto de desplazamiento más marcado */
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* Aumento de sombra más sutil */
+  border: 1px solid #2b8a3e; /* Borde verde al pasar el ratón */
 }
 
 .feature h3 {
-  font-size: 24px;
-  margin-bottom: 15px;
-  color: #2b8a3e;
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #2b8a3e; /* Verde */
+  font-weight: 600;
 }
 
 .feature p {
-  font-size: 16px;
+  font-size: 18px;
   color: #666;
+  margin-bottom: 25px;
+  line-height: 1.5; /* Mejora la legibilidad del texto */
+}
+
+.feature .feature-icon {
+  font-size: 60px;
+  color: #fcc419; /* Amarillo */
+  margin-bottom: 20px;
+}
+
+.feature .cta-button {
+  background-color: #2b8a3e; /* Verde */
+  color: white;
+  padding: 14px 25px;
+  font-size: 18px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 2px solid #2b8a3e;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 20px; /* Espaciado entre el texto y el botón */
+}
+
+.feature .cta-button:hover {
+  background-color: white;
+  color: #2b8a3e;
+  border-color: #fcc419; /* Amarillo */
+  transform: scale(1.08); /* Efecto de aumento */
 }
 
 /* Estilos del Footer */
 footer {
   text-align: center;
-  padding: 30px 20px;
+  padding: 40px 20px;
   background-color: #2b8a3e;
   color: white;
-  font-size: 14px;
-  margin-top: 80px;
+  font-size: 16px;
+  margin-top: 100px;
 }
 
 /* Responsividad */
@@ -168,12 +219,12 @@ footer {
 
   header nav ul li {
       display: block;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
   }
 
   .cta-button {
-      font-size: 18px;
-      padding: 12px 25px;
+      font-size: 20px;
+      padding: 15px 30px;
   }
 
   .features-container {
@@ -183,14 +234,14 @@ footer {
 
   .feature {
       width: 90%;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
   }
 
   .hero-content h2 {
-      font-size: 36px;
+      font-size: 44px;
   }
 
   .hero-content p {
-      font-size: 18px;
+      font-size: 20px;
   }
 }
