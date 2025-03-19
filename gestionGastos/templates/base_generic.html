@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FinanTrack{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles/generalStyles.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/inicio.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/auth.css' %}">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>FinanTrack</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{% url 'index' %}">Inicio</a></li>
+                <li><a href="{% url 'register' %}">Registrarse</a></li>
+                <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FinanTrack. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

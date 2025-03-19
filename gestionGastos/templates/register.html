@@ -1,0 +1,37 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Registrar - FinanTrack{% endblock %}
+
+{% block content %}
+    <section class="auth-container">
+        <div class="auth-box">
+            <h2>Registrar cuenta</h2>
+            <p>Completa el formulario para crear una cuenta en FinanTrack</p>
+
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="id_username">Username:</label>
+                    {{ form.username }}
+                    <small>Requerido. 150 caracteres o menos. Letras, dígitos y @./+/-/_ únicamente.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password1">Contraseña:</label>
+                    {{ form.password1 }}
+                    <small>La contraseña debe tener al menos 8 caracteres.</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="id_password2">Confirmar contraseña:</label>
+                    {{ form.password2 }}
+                </div>
+
+                <button type="submit" class="cta-button">Registrar</button>
+            </form>
+
+            <p class="redirect-link">¿Ya tienes una cuenta? <a href="{% url 'login' %}">Inicia sesión</a></p>
+        </div>
+    </section>
+{% endblock %}

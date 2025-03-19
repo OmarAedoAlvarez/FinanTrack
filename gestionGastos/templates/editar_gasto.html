@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Gasto - FinanTrack</title>
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/editar_gasto.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Menú a la izquierda -->
+        <nav class="sidebar">
+            <ul>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'lista_gastos' %}">Gastos</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal (Formulario de Edición) -->
+        <div class="dashboard">
+            <h2>Editar Gasto</h2>
+
+            <!-- Formulario para editar un gasto -->
+            <form method="POST">
+                {% csrf_token %}
+                
+                <!-- Título del Gasto -->
+                <div class="form-group">
+                    <label for="titulo">Título del Gasto:</label>
+                    <input type="text" id="titulo" name="titulo" value="{{ gasto.titulo }}" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="categoria">Categoría:</label>
+                  <select id="categoria" name="categoria" required>
+                      <option value="Alimentación" {% if gasto.categoria.nombre == "Alimentación" %}selected{% endif %}>Alimentación</option>
+                      <option value="Transporte" {% if gasto.categoria.nombre == "Transporte" %}selected{% endif %}>Transporte</option>
+                      <option value="Entretenimiento" {% if gasto.categoria.nombre == "Entretenimiento" %}selected{% endif %}>Entretenimiento</option>
+                      <option value="Vivienda" {% if gasto.categoria.nombre == "Vivienda" %}selected{% endif %}>Vivienda</option>
+                      <option value="Otro" {% if gasto.categoria.nombre == "Otro" %}selected{% endif %}>Otro</option>
+                  </select>
+              </div>
+                              <!-- Monto -->
+                <div class="form-group">
+                    <label for="monto">Monto:</label>
+                    <input type="number" id="monto" name="monto" value="{{ gasto.monto }}" step="0.01" required>
+                </div>
+
+                <!-- Fecha -->
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" value="{{ gasto.fecha|date:'Y-m-d' }}" required>
+                </div>
+
+                <!-- Descripción -->
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion">{{ gasto.descripcion }}</textarea>
+                </div>
+
+                <!-- Botón de Guardar -->
+                <button type="submit" class="cta-button">Guardar Cambios</button>
+
+                <!-- Botón de Cancelar -->
+                <a href="{% url 'lista_gastos' %}" class="cta-button cancel">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

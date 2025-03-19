@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Gasto - FinanTrack</title>
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/registrar_gasto.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Menu a la izquierda -->
+        <nav class="sidebar">
+            <ul>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'lista_gastos' %}">Gastos</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal (Formulario de Registro de Gasto) -->
+        <div class="dashboard">
+            <h2>Registrar Gasto</h2>
+
+            <!-- Formulario para registrar un gasto -->
+            <form method="POST">
+                {% csrf_token %}
+                
+                <!-- Título del Gasto -->
+                <div class="form-group">
+                    <label for="titulo">Título del Gasto:</label>
+                    <input type="text" id="titulo" name="titulo" required>
+                </div>
+
+                <!-- Categoría -->
+                <div class="form-group">
+                    <label for="categoria">Categoría:</label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="Alimentación">Alimentación</option>
+                        <option value="Transporte">Transporte</option>
+                        <option value="Ocio">Entretenimiento</option>
+                        <option value="Vivienda">Vivienda</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <!-- Monto -->
+                <div class="form-group">
+                    <label for="monto">Monto:</label>
+                    <input type="number" id="monto" name="monto" required step="0.01">
+                </div>
+
+                <!-- Fecha -->
+                <div class="form-group">
+                    <label for="fecha">Fecha:</label>
+                    <input type="date" id="fecha" name="fecha" required>
+                </div>
+
+                <!-- Descripción -->
+                <div class="form-group">
+                    <label for="descripcion">Descripción:</label>
+                    <textarea id="descripcion" name="descripcion" placeholder="Descripción opcional del gasto"></textarea>
+                </div>
+
+                <!-- Botón de Enviar -->
+                <button type="submit" class="cta-button">Registrar Gasto</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

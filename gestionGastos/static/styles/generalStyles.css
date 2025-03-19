@@ -1,0 +1,196 @@
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif; /* Fuente moderna */
+  line-height: 1.6;
+  background-color: #f9f9f9; /* Fondo claro */
+  color: #333; /* Texto oscuro para contraste */
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Header */
+header {
+  background-color: #2b8a3e;  /* Verde */
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+header .logo h1 {
+  margin-bottom: 10px;
+  font-size: 40px;
+  letter-spacing: 1px; /* Espaciado entre letras */
+  font-weight: 600;
+}
+
+header nav ul {
+  list-style: none;
+  margin-top: 10px;
+}
+
+header nav ul li {
+  display: inline-block;
+  margin: 0 25px;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+  color: #fcc419;  /* Amarillo */
+}
+
+/* Sección Hero */
+.hero {
+  background-color: #fcc419;  /* Amarillo */
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.hero-content h2 {
+  font-size: 50px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.hero-content p {
+  font-size: 20px;
+  margin-bottom: 30px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  background-color: white;
+  color: #2b8a3e;  /* Verde */
+  padding: 15px 30px;
+  font-size: 20px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 2px solid #2b8a3e;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.cta-button:hover {
+  background-color: #2b8a3e;  /* Verde */
+  color: white;
+  border-color: #fcc419;  /* Amarillo */
+  transform: scale(1.05); /* Efecto de aumento */
+}
+
+/* Sección de características */
+.features {
+  background-color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.features h2 {
+  margin-bottom: 40px;
+  font-size: 32px;
+  font-weight: 600;
+  color: #2b8a3e;  /* Verde */
+}
+
+.features-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.feature {
+  background-color: #fff;
+  padding: 30px;
+  margin: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  width: 280px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.feature:hover {
+  transform: translateY(-10px); /* Efecto de desplazamiento al pasar el ratón */
+}
+
+.feature h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #2b8a3e;
+}
+
+.feature p {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Estilos del Footer */
+footer {
+  text-align: center;
+  padding: 30px 20px;
+  background-color: #2b8a3e;
+  color: white;
+  font-size: 14px;
+  margin-top: 80px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  header nav ul {
+      text-align: center;
+  }
+
+  header nav ul li {
+      display: block;
+      margin-bottom: 10px;
+  }
+
+  .cta-button {
+      font-size: 18px;
+      padding: 12px 25px;
+  }
+
+  .features-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .feature {
+      width: 90%;
+      margin-bottom: 20px;
+  }
+
+  .hero-content h2 {
+      font-size: 36px;
+  }
+
+  .hero-content p {
+      font-size: 18px;
+  }
+}

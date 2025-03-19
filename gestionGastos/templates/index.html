@@ -1,0 +1,31 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Inicio - FinanTrack{% endblock %}
+
+{% block content %}
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Gestiona tus gastos fácilmente</h2>
+            <p>Con FinanTrack, puedes llevar un control completo de tus finanzas, establecer presupuestos y analizar tus gastos en tiempo real.</p>
+            <a href="{% url 'register' %}" class="cta-button">Empezar ahora</a>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>Características principales</h2>
+        <div class="features-container">
+            <div class="feature">
+                <h3>Control de gastos</h3>
+                <p>Registra y organiza tus gastos de manera eficiente. ¡No más sorpresas a final de mes!</p>
+            </div>
+            <div class="feature">
+                <h3>Presupuestos personalizados</h3>
+                <p>Establece un presupuesto para cada categoría y mantén tu dinero bajo control.</p>
+            </div>
+            <div class="feature">
+                <h3>Resumen detallado</h3>
+                <p>Consulta informes visuales de tus gastos, mes a mes, y mantén tus finanzas organizadas.</p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

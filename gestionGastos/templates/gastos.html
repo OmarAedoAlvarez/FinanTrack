@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Gastos - FinanTrack</title>
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Menu a la izquierda -->
+        <nav class="sidebar">
+            <ul>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'lista_gastos' %}">Gastos</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal (Lista de Gastos) -->
+        <div class="dashboard">
+            <h2>Lista de Gastos</h2>
+
+            <!-- Mostrar los gastos registrados -->
+            <ul>
+                {% for gasto in gastos %}
+                    <li>
+                        {{ gasto.titulo }} - {{ gasto.categoria }} - {{ gasto.monto }} USD
+                        <span>{{ gasto.fecha }}</span>
+                    </li>
+                {% empty %}
+                    <li>No hay gastos registrados.</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Botón para registrar un nuevo gasto -->
+            <a href="{% url 'registrar_gasto' %}" class="cta-button">Registrar Gasto</a>
+
+            <!-- Deshacer el último gasto si la pila tiene registros -->
+            {% if pila_gastos %}
+                <form method="POST" action="{% url 'deshacer_gasto' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="cta-button">Deshacer Último Gasto</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

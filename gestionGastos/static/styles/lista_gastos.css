@@ -1,0 +1,216 @@
+/* Contenedor principal de la lista de gastos */
+.lista-gastos-container {
+  width: 60%;
+  margin-left: 20rem;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.lista-gastos-container h2 {
+  font-size: 28px;
+  color: #2b8a3e;
+  margin-bottom: 20px;
+}
+
+/* Estilos de cada gasto */
+.gasto-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f9f9f9;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.gasto-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Información del gasto */
+.gasto-info {
+  flex: 1;
+  text-align: left;
+}
+
+.gasto-info h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.gasto-info span {
+  font-size: 14px;
+  color: #666;
+}
+
+/* Acciones (Editar y Eliminar) */
+.gasto-actions {
+  display: flex;
+  align-items: center;
+}
+
+/* Estilos para los botones */
+.gasto-actions a,
+.gasto-actions form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  margin-left: 10px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Botón de Editar (📝) */
+.gasto-actions a {
+  background-color: #2b8a3e;
+  color: white;
+  text-decoration: none;
+}
+
+.gasto-actions a:hover {
+  transform: scale(1.2);
+  background-color: #1f6e2e;
+}
+
+/* Botón de Eliminar (🗑️) */
+.gasto-actions form button {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+}
+
+.gasto-actions form button:hover {
+  transform: scale(1.2);
+  background-color: #c9302c;
+}
+
+/* Botón para registrar gasto */
+.cta-button {
+  display: inline-block;
+  background: #2b8a3e;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.cta-button:hover {
+  background: #fcc419;
+  color: #2b8a3e;
+  transform: scale(1.05);
+}
+
+/* Botón de deshacer último gasto */
+.undo-button {
+  display: inline-block;
+  background: #ffb400;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin-top: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.undo-button:hover {
+  background: #ff9200;
+  transform: scale(1.05);
+}
+/* ======== ESTILOS PARA EL FILTRO DE TIEMPO ======== */
+.filter-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.filter-form label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.filter-form select {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.filter-form select:hover {
+  border-color: #2b8a3e;
+}
+
+/* ======== ESTILOS PARA EL FORMULARIO DE FILTRO POR FECHAS ======== */
+.date-filter-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.date-filter-form label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.date-filter-form input {
+  padding: 8px 12px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.date-filter-form input:hover {
+  border-color: #2b8a3e;
+}
+
+.date-filter-form button {
+  padding: 8px 15px;
+  border-radius: 5px;
+  background: #2b8a3e;
+  color: white;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.date-filter-form button:hover {
+  background: #1f6e2e;
+  transform: scale(1.05);
+}

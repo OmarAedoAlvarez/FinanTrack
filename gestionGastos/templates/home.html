@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - FinanTrack</title>
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Menú lateral -->
+        <nav class="sidebar">
+            <ul>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'lista_gastos' %}">Gastos</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal (Dashboard) -->
+        <div class="dashboard">
+            <h2>Bienvenido, {{ user.username }}</h2>
+            
+            <!-- Resumen de gastos -->
+            <div class="summary">
+                <p>Total de Gastos: <strong>{{ total_gastos }} PEN</strong></p>
+
+                {% if categoria_mayor_gasto %}
+                    <p>Categoría con el Gasto Mayor: <strong>{{ categoria_mayor_gasto }}</strong> - {{ mayor_gasto }} PEN</p>
+                {% else %}
+                    <p>No hay categorías con gastos registrados.</p>
+                {% endif %}
+
+                {% if gasto_mas_fuerte %}
+                    <p>Gasto más alto: <strong>{{ gasto_mas_fuerte.titulo }}</strong> - {{ gasto_mas_fuerte.monto }} PEN ({{ gasto_mas_fuerte.fecha|date:"d/m/Y" }})</p>
+                {% else %}
+                    <p>No hay gastos registrados.</p>
+                {% endif %}
+            </div>
+
+            <!-- Gráficos -->
+            <div class="charts">
+                <div id="gastosGraph"></div>
+            </div>
+
+            <!-- Gastos agrupados por categoría -->
+            <h3>Gastos por Categoría</h3>
+            {% for categoria, gastos in gastos_por_categoria.items %}
+                <h4>{{ categoria }}</h4>
+                <ul>
+                    {% for gasto in gastos %}
+                        <li>
+                            {{ gasto.titulo }} - {{ gasto.monto }} USD - {{ gasto.fecha|date:"d/m/Y" }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% empty %}
+                <p>No hay gastos registrados para esta categoría.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

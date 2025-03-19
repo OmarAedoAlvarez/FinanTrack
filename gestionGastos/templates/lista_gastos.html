@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Gastos - FinanTrack</title>
+    <link rel="stylesheet" href="{% static 'styles/home.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/lista_gastos.css' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Menú lateral -->
+        <nav class="sidebar">
+            <ul>
+                <li><a href="{% url 'home' %}">Inicio</a></li>
+                <li><a href="{% url 'lista_gastos' %}">Gastos</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenedor principal -->
+        <div class="lista-gastos-container">
+            <h2>Lista de Gastos</h2>
+
+            <!-- Filtro de tiempo -->
+            <form method="GET" action="{% url 'lista_gastos' %}" class="filter-form">
+                <label for="filtro_tiempo">Filtrar por:</label>
+                <select name="filtro_tiempo" id="filtro_tiempo" onchange="this.form.submit()">
+                    <option value="todos" {% if filtro == "todos" %}selected{% endif %}>Todos los gastos</option>
+                    <option value="ultimo_mes" {% if filtro == "ultimo_mes" %}selected{% endif %}>Último mes</option>
+                    <option value="ultimos_3_meses" {% if filtro == "ultimos_3_meses" %}selected{% endif %}>Últimos 3 meses</option>
+                    <option value="este_anio" {% if filtro == "este_anio" %}selected{% endif %}>Este año</option>
+                    <option value="personalizado" {% if filtro == "personalizado" %}selected{% endif %}>Rango personalizado</option>
+                </select>
+            </form>
+
+            <!-- Si el usuario elige "personalizado", mostrar el formulario de fechas -->
+            {% if filtro == "personalizado" %}
+                <form method="GET" action="{% url 'lista_gastos' %}" class="date-filter-form">
+                    <label for="fecha_inicio">Desde:</label>
+                    <input type="date" id="fecha_inicio" name="fecha_inicio" value="{{ request.GET.fecha_inicio }}">
+
+                    <label for="fecha_fin">Hasta:</label>
+                    <input type="date" id="fecha_fin" name="fecha_fin" value="{{ request.GET.fecha_fin }}">
+
+                    <input type="hidden" name="filtro_tiempo" value="personalizado">
+
+                    <button type="submit">Filtrar</button>
+                </form>
+            {% endif %}
+
+            <!-- Lista de gastos -->
+            {% if gastos %}
+                {% for gasto in gastos %}
+                    <div class="gasto-item">
+                        <div class="gasto-info">
+                            <h3>{{ gasto.titulo }}</h3>
+                            <span>{{ gasto.categoria.nombre }} - {{ gasto.monto }} PEN - {{ gasto.fecha|date:"d/m/Y" }}</span>
+                        </div>
+
+                        <div class="gasto-actions">
+                            <!-- Botón de Editar (📝) -->
+                            <a href="{% url 'editar_gasto' gasto.id %}" title="Editar">📝</a>
+
+                            <!-- Botón de Eliminar (🗑️) -->
+                            <form action="{% url 'eliminar_gasto' gasto.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" title="Eliminar">🗑️</button>
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No hay gastos registrados.</p>
+            {% endif %}
+
+            <!-- Botón para registrar un nuevo gasto -->
+            <a href="{% url 'registrar_gasto' %}" class="cta-button">Registrar Gasto</a>
+
+            <!-- Mostrar el botón "Generar Reporte" solo si hay gastos -->
+            {% if gastos %}
+                <form method="GET" action="{% url 'generar_reporte' %}">
+                    <input type="hidden" name="filtro_tiempo" value="{{ filtro }}">
+                    <input type="hidden" name="fecha_inicio" value="{{ fecha_inicio }}">
+                    <input type="hidden" name="fecha_fin" value="{{ fecha_fin }}">
+                    <button type="submit" class="cta-button">Generar Reporte</button>
+                </form>
+            {% endif %}
+
+            <!-- Botón para deshacer el último gasto solo si no hay filtros activos -->
+            {% if request.session.pila_gastos and filtro == "todos" %}
+                <form method="POST" action="{% url 'deshacer_gasto' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="undo-button">↩ Deshacer Último Gasto</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
