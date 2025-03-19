@@ -1,143 +1,150 @@
-### Documentación FinanTrack
+# Documentación del Sistema de Gestión de Gastos
 
-Este conjunto de vistas corresponde a un sistema de gestión de gastos donde los usuarios pueden registrar, editar, eliminar y consultar sus gastos, además de generar reportes en formato CSV. A continuación se proporciona una descripción detallada de cada vista y su funcionamiento.
+Este documento describe las vistas y funcionalidades principales del sistema de gestión de gastos, desarrollado con Django. Los usuarios pueden registrar, editar, eliminar y consultar sus gastos, además de generar reportes en formato CSV.
+
+## Tabla de Contenidos
+1. [Introducción](#introducción)
+2. [Vistas](#vistas)
+   - [`index`](#index)
+   - [`register`](#register)
+   - [`login_view`](#login_view)
+   - [`home`](#home)
+   - [`obtener_filtro_fecha`](#obtener_filtro_fecha)
+   - [`generar_reporte`](#generar_reporte)
+   - [`lista_gastos`](#lista_gastos)
+   - [`registrar_gasto`](#registrar_gasto)
+   - [`deshacer_gasto`](#deshacer_gasto)
+   - [`editar_gasto`](#editar_gasto)
+   - [`eliminar_gasto`](#eliminar_gasto)
+3. [Modelo de Datos](#modelo-de-datos)
+4. [Funcionalidad de la Pila de Gastos](#funcionalidad-de-la-pila-de-gastos)
+5. [Seguridad](#seguridad)
 
 ---
 
-### 1. **`index`**
+## Introducción
 
-- **Descripción**: Esta vista maneja la página de inicio de la aplicación, donde se muestra la pantalla principal de bienvenida.
+El sistema de gestión de gastos permite a los usuarios controlar y administrar sus finanzas personales, registrando los gastos en categorías definidas. Los usuarios pueden acceder a su historial de gastos, filtrar por fechas y generar reportes en formato CSV.
+
+---
+
+## Vistas
+
+### `index`
+- **Descripción**: Página principal de la aplicación donde se muestra una vista de bienvenida.
 - **Método**: `GET`
-- **Entrada**: No tiene parámetros específicos.
+- **Parámetros**: Ninguno.
 - **Salida**: Renderiza la plantilla `index.html`.
 
----
-
-### 2. **`register`**
-
-- **Descripción**: Vista para permitir que los nuevos usuarios se registren en la plataforma.
+### `register`
+- **Descripción**: Vista para registrar un nuevo usuario en el sistema.
 - **Método**: `POST` para crear un nuevo usuario, `GET` para mostrar el formulario de registro.
-- **Entrada**:
-    - `POST`: Los datos del formulario de creación de usuario.
+- **Parámetros**: 
+  - `POST`: Datos del formulario de creación de usuario.
 - **Salida**:
-    - Si el formulario es válido, crea al usuario y lo autentica, redirigiendo al usuario a la página de login.
-    - Si no es válido, renderiza la plantilla `register.html` con el formulario.
+  - Si el formulario es válido, crea al usuario y lo autentica, redirigiendo al login.
+  - Si el formulario no es válido, se renderiza la plantilla `register.html` con el formulario y errores.
 
----
-
-### 3. **`login_view`**
-
-- **Descripción**: Vista para gestionar el inicio de sesión de los usuarios registrados.
+### `login_view`
+- **Descripción**: Vista para iniciar sesión de un usuario registrado.
 - **Método**: `POST` para procesar el inicio de sesión, `GET` para mostrar el formulario de login.
-- **Entrada**:
-    - `POST`: El formulario de inicio de sesión con el nombre de usuario y la contraseña.
+- **Parámetros**: 
+  - `POST`: Nombre de usuario y contraseña.
 - **Salida**:
-    - Si el usuario es autenticado correctamente, lo redirige al dashboard (`home`).
-    - Si no es válido, renderiza el formulario de login con el error.
+  - Si la autenticación es exitosa, el usuario es redirigido a la vista `home`.
+  - Si la autenticación falla, se renderiza la plantilla `login.html` con los errores correspondientes.
 
----
-
-### 4. **`home`**
-
-- **Descripción**: Vista principal donde se muestran los gastos del usuario.
+### `home`
+- **Descripción**: Vista principal del usuario donde se muestran sus gastos.
 - **Método**: `GET`
-- **Entrada**: No tiene parámetros específicos.
+- **Parámetros**: Ninguno.
 - **Salida**:
-    - Renderiza la plantilla `home.html` con el resumen de los gastos agrupados por categoría, el total de gastos, la categoría con mayor gasto y el gasto individual más grande.
+  - Renderiza `home.html` con los gastos del usuario agrupados por categoría, el total de gastos, la categoría con mayor gasto y el gasto más alto.
 
----
-
-### 5. **`obtener_filtro_fecha`**
-
-- **Descripción**: Función que devuelve la fecha límite para los filtros de tiempo predefinidos.
+### `obtener_filtro_fecha`
+- **Descripción**: Función para obtener la fecha límite según el filtro seleccionado.
 - **Método**: `GET`
-- **Entrada**: Parámetro `filtro` que puede ser "ultimo_mes", "ultimos_3_meses" o "este_anio".
-- **Salida**: La fecha correspondiente al filtro.
+- **Parámetros**: 
+  - `filtro`: Puede ser "ultimo_mes", "ultimos_3_meses", "este_anio".
+- **Salida**: Devuelve la fecha límite según el filtro.
 
----
-
-### 6. **`generar_reporte`**
-
-- **Descripción**: Vista que permite generar un reporte de los gastos en formato CSV, con filtros de fecha aplicados.
+### `generar_reporte`
+- **Descripción**: Genera un reporte de los gastos del usuario en formato CSV.
 - **Método**: `GET`
-- **Entrada**:
-    - `filtro_tiempo`: Parámetro que determina el tipo de filtro a aplicar (por ejemplo, "ultimo_mes", "este_anio").
-    - `fecha_inicio`, `fecha_fin`: Fechas de filtro personalizadas en formato `YYYY-MM-DD`.
-- **Salida**:
-    - Un archivo CSV con los gastos filtrados que el usuario puede descargar.
+- **Parámetros**:
+  - `filtro_tiempo`: Tipo de filtro (último mes, últimos 3 meses, etc.).
+  - `fecha_inicio` y `fecha_fin`: Fechas personalizadas.
+- **Salida**: Un archivo CSV descargable con los gastos filtrados.
 
----
-
-### 7. **`lista_gastos`**
-
-- **Descripción**: Vista para mostrar la lista de gastos del usuario con la opción de filtrar por tiempo.
+### `lista_gastos`
+- **Descripción**: Vista que muestra una lista de los gastos del usuario con filtros aplicados.
 - **Método**: `GET`
-- **Entrada**:
-    - `filtro_tiempo`: Parámetro que determina el filtro de tiempo ("ultimo_mes", "este_anio", "personalizado").
-    - `fecha_inicio`, `fecha_fin`: Fechas personalizadas para el filtro.
+- **Parámetros**:
+  - `filtro_tiempo`: Tipo de filtro (último mes, este año, etc.).
+  - `fecha_inicio` y `fecha_fin`: Fechas para filtro personalizado.
+- **Salida**: Renderiza `lista_gastos.html` con los gastos filtrados.
+
+### `registrar_gasto`
+- **Descripción**: Permite al usuario registrar un nuevo gasto.
+- **Método**: `POST` para crear el gasto, `GET` para mostrar el formulario.
+- **Parámetros**: 
+  - `POST`: Datos del formulario de registro (título, categoría, monto, fecha, descripción).
 - **Salida**:
-    - Renderiza la plantilla `lista_gastos.html` con la lista de gastos filtrados y las fechas de filtro.
+  - Redirige a `lista_gastos` después de guardar el gasto.
 
----
-
-### 8. **`registrar_gasto`**
-
-- **Descripción**: Vista para permitir a los usuarios registrar un nuevo gasto.
-- **Método**: `POST` para procesar el formulario, `GET` para mostrar el formulario de registro de gastos.
-- **Entrada**:
-    - `POST`: Datos del formulario para registrar el gasto (título, categoría, monto, fecha, descripción).
-- **Salida**:
-    - Si el gasto se guarda correctamente, redirige a la vista `lista_gastos`.
-
----
-
-### 9. **`deshacer_gasto`**
-
-- **Descripción**: Vista para deshacer el último gasto registrado (basado en una "pila" de gastos).
+### `deshacer_gasto`
+- **Descripción**: Elimina el último gasto registrado por el usuario.
 - **Método**: `GET`
-- **Entrada**: No tiene parámetros específicos.
-- **Salida**:
-    - El último gasto registrado se elimina de la base de datos y de la "pila" en la sesión.
+- **Parámetros**: Ninguno.
+- **Salida**: Elimina el último gasto registrado y redirige a `lista_gastos`.
 
----
-
-### 10. **`editar_gasto`**
-
-- **Descripción**: Vista para editar un gasto previamente registrado.
+### `editar_gasto`
+- **Descripción**: Permite al usuario editar un gasto previamente registrado.
 - **Método**: `POST` para actualizar el gasto, `GET` para mostrar el formulario de edición.
-- **Entrada**:
-    - `gasto_id`: El ID del gasto que se desea editar.
-    - `POST`: Datos del formulario para actualizar el gasto.
-- **Salida**:
-    - Si el gasto se edita correctamente, redirige a la vista `lista_gastos`.
+- **Parámetros**:
+  - `gasto_id`: ID del gasto a editar.
+- **Salida**: Redirige a `lista_gastos` después de guardar los cambios.
 
----
-
-### 11. **`eliminar_gasto`**
-
-- **Descripción**: Vista para eliminar un gasto registrado.
+### `eliminar_gasto`
+- **Descripción**: Elimina un gasto registrado por el usuario.
 - **Método**: `GET`
-- **Entrada**:
-    - `gasto_id`: El ID del gasto que se desea eliminar.
-- **Salida**:
-    - El gasto se elimina de la base de datos y, si se encuentra en la "pila", también se elimina de esta.
+- **Parámetros**:
+  - `gasto_id`: ID del gasto a eliminar.
+- **Salida**: Elimina el gasto de la base de datos y redirige a `lista_gastos`.
 
 ---
 
-### **Modelo de Datos**
+## Modelo de Datos
 
-- **`Gasto`**: Representa un gasto realizado por el usuario, con atributos como `titulo`, `categoria`, `monto`, `fecha` y `descripcion`.
-- **`Categoria`**: Representa las categorías de los gastos (por ejemplo, "Comida", "Transporte").
+### `Gasto`
+- Representa un gasto realizado por el usuario, con los siguientes atributos:
+  - `titulo`: Nombre o título del gasto.
+  - `categoria`: Categoría asociada al gasto.
+  - `monto`: Monto del gasto.
+  - `fecha`: Fecha en que se realizó el gasto.
+  - `descripcion`: Descripción adicional del gasto.
+
+### `Categoria`
+- Representa una categoría de gastos (por ejemplo, "Comida", "Transporte").
 
 ---
 
-### **Funcionalidad de la Pila de Gastos**
+## Funcionalidad de la Pila de Gastos
 
-La aplicación utiliza una pila global (`pila_gastos`) para mantener un registro temporal de los últimos gastos añadidos. Esto permite a los usuarios "deshacer" el último gasto realizado. La pila se maneja utilizando la sesión de Django, asegurando que el historial sea persistente durante la sesión del usuario.
+El sistema implementa una pila (`pila_gastos`) para mantener un registro temporal de los gastos recién registrados. Esto permite "deshacer" el último gasto registrado. La pila se almacena en la sesión del usuario y se actualiza cada vez que un gasto es añadido o eliminado.
 
 ---
 
-### **Seguridad**
+## Seguridad
 
-- Las vistas que requieren que el usuario esté autenticado están protegidas mediante el decorador `@login_required`.
-- Las sesiones de usuario son utilizadas para gestionar la pila de gastos, lo que permite mantener un estado persistente de las acciones del usuario.
+- Se utiliza el decorador `@login_required` para proteger las vistas que requieren autenticación.
+- La pila de gastos se gestiona a través de la sesión de Django, garantizando que la información esté disponible solo durante la sesión del usuario.
+- Se manejan los errores de autenticación y validación de formularios para proteger las operaciones de los usuarios.
+
+---
+
+### Notas Adicionales
+
+- Asegúrate de que todas las dependencias de Django estén instaladas y correctamente configuradas.
+- El sistema está diseñado para ser escalable, permitiendo la futura adición de nuevas funcionalidades como el soporte para múltiples monedas o la integración con servicios externos de pago.
+
