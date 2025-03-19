@@ -1,4 +1,4 @@
-# Documentación del FinanTrack
+# Documentación de FinanTrack
 
 Este documento describe las vistas y funcionalidades principales del sistema de gestión de gastos, desarrollado con Django. Los usuarios pueden registrar, editar, eliminar y consultar sus gastos, además de generar reportes en formato CSV.
 
